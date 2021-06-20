@@ -1,43 +1,50 @@
 import json
 import csv
 
-def upload(json_data):
+
+def save(json_data):
+    # Write data to json file
     try:
-        # Write into json file
         with open('map.json', 'w') as json_file:
             json.dump(json_data, json_file)
+    except:
+        pass
 
-    except:       
-        with open('map.json', 'w') as json_file:
-            json.dump("{}", json_file)
-
+    # Convert json to csv
     try:
-        # Header field yet to test
-        # Write into csv file
         with open('map.csv', 'w') as file:
             csv_writer = csv.writer(file)
-            # Add header in csv file
-            header = ['floor', 'x', 'y', 'network']
+
+            # Add headers in the csv file
+            header = ['floor', 'x', 'y', 'networks']
             csv_writer.writerow(header)
 
             for floor in json_data:
                 for point in json_data[floor]['points']:
                     x = point['x']
                     y = point['y']
-                    network = point['meta']
+                    networks = point['networks']
 
-                    row = list((floor, x, y, network))
+                    row = list((floor, x, y, networks))
                     csv_writer.writerow(row)
-        
     except:
-        with open('map.csv', 'w') as csv_file:
-            csv.writer(csv_file).writerow("")   
-            
-def download():
+        pass
+
+
+def load():
     try:
         with open('map.json') as json_file:
             json_data = json.load(json_file)
 
         return json_data
     except:
-        return {}
+        return {
+            'floors': [
+                {
+                    'name': 'F1',
+                    'points': [
+
+                    ]
+                }
+            ]
+        }
