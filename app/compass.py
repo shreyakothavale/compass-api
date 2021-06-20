@@ -39,11 +39,12 @@ def load():
         return json_data
     except:
         return {
+            'whitelist': [],
             'floors': [
                 {
                     'name': 'F1',
                     'points': [
-
+        
                     ]
                 }
             ]
