@@ -20,7 +20,7 @@ def upload():
             'message': 'Failed to upload map'
         }), 400
 
-@app.route('/download')
+@app.route('/download', methods=['GET'])
 def download():
     data = compass.load()
     return jsonify({
