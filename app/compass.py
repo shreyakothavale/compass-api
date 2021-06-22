@@ -12,20 +12,23 @@ def save(json_data):
 
     # Convert json to csv
     try:
-        with open('map.csv', 'w') as file:
+        with open('map.csv', 'a') as file:
             csv_writer = csv.writer(file)
 
             # Add headers in the csv file
-            header = ['floor', 'x', 'y', 'networks']
-            csv_writer.writerow(header)
+            # header = ['name', 'floor', 'x', 'y', 'networks']
+            # csv_writer.writerow(header)
 
-            for floor in json_data:
-                for point in json_data[floor]['points']:
+            floors = json_data["data"]["floors"]
+            for floor in floors:
+                points = floor['points']
+                for point in points:
+                    name = point['name']
                     x = point['x']
                     y = point['y']
-                    networks = point['networks']
+                    network = point['network']
 
-                    row = list((floor, x, y, networks))
+                    row = list((name, floor['name'], x, y, network))
                     csv_writer.writerow(row)
     except:
         pass
