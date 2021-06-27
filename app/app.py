@@ -26,3 +26,10 @@ def download():
     return jsonify({
         'data': data
     }) 
+
+@app.route('/csv', methods=['GET'])
+def csv():
+    data = compass.load_csv()
+    return jsonify({
+        'data': data
+    }) 

@@ -1,6 +1,6 @@
 import json
 import csv
-
+import itertools
 
 def save(json_data):
     # Write data to json file
@@ -52,3 +52,20 @@ def load():
                 }
             ]
         }
+
+def load_csv():
+    try:
+        data = []
+        with open('map.csv') as csv_file:
+            csv_data = csv.reader(csv_file, delimiter=',')
+        
+            # for row in csv_data:
+            #     data.extend(row)
+            #     data.append('\n')
+
+            data = list(csv_data) 
+            
+        #return ','.join(data)
+        return list(itertools.chain.from_iterable(data))
+    except:
+        return ""
